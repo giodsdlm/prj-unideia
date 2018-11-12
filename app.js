@@ -17,7 +17,6 @@ require('./models/Idea');
 const Idea = mongoose.model('ideas');
 
 
-
 // Handlebars Middleware
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
@@ -32,10 +31,17 @@ app.get('/', (req, res) => {
   });
 });
 
-//About
+// About
 app.get('/about', (req, res) => {
   res.render('about');
 });
+
+// Formulário para inserir ideias
+app.get('/ideas/add', (req, res) => {
+  res.render('ideas/add');
+});
+
+
 
 const port = 5000;
 app.listen(port, ()=>{
