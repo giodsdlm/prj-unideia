@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Connect to Mongoose
+// Connect to Mongoose e defining project database
 mongoose.connect('mongodb://localhost/unideia-dev', {
     useNewUrlParser: true
   }) //promise
@@ -70,7 +70,15 @@ app.post('/ideas', (req, res) => {
        details: req.body.details
      });
    } else {
-     res.send('passed');
+     const newUser = {
+       title: req.body.title,
+       details: req.body.details
+     }
+     new Idea(newUser)
+     .save()
+     .then(idea => {
+       res.redirect('/ideas');
+     })
    }
 });
 
