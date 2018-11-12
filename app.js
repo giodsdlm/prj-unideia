@@ -4,14 +4,21 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-//Connect to Mongoose
+// Connect to Mongoose
 mongoose.connect('mongodb://localhost/unideia-dev', {
    useNewUrlParser: true 
 })  //promise
 .then(() => console.log('MongoDB Connected...'))
 .catch(err => console.log(err)); 
 
-//Handlebars Middleware
+
+// Load Idea Model
+require('./models/Idea');
+const Idea = mongoose.model('ideas');
+
+
+
+// Handlebars Middleware
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
