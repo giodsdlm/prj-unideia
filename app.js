@@ -52,9 +52,26 @@ app.get('/ideas/add', (req, res) => {
 
 // Processar formulário
 app.post('/ideas', (req, res) => {
-  console.log(req.body);
-  res.send('Ok');
 
+//Validação de campos vazios no lado do servidor.
+  let errors = [];
+
+   if (!req.body.title) {
+     errors.push({text: 'Por favor adicione um título.'});
+   }
+   if (!req.body.details) {
+     errors.push({text: 'Por favor adicione detalhes.'});
+   }
+
+   if(errors.length > 0){ 
+     res.render('ideas/add', {
+       errors: errors,
+       title: req.body.title,
+       details: req.body.details
+     });
+   } else {
+     res.send('passed');
+   }
 });
 
 
