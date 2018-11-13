@@ -2,7 +2,9 @@
   <div class="card card-body mb-2">
     <h4>{{title}}</h4>
     <p>{{details}}</p>
+    <a class="btn btn-outline-dark btn-sm" href="/ideas/edit/{{id}}">Editar</a>
   </div>
+  
 {{else}}
   <p>Nenhuma ideia foi encontrada :(</p>
 {{/each}}
