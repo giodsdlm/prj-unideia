@@ -40,46 +40,64 @@ app.get('/', (req, res) => {
   });
 });
 
+
 // About
 app.get('/about', (req, res) => {
   res.render('about');
 });
 
-// Formulário para inserir ideias
+
+// Idea Index Page
+app.get('/ideas', (req, res) => {
+  Idea.find({})
+    .sort({date:'desc'})
+    .then(ideas =>{
+      res.render('ideas/index', {
+        ideas:ideas
+      });
+    });
+});
+
+// Add ideas form
 app.get('/ideas/add', (req, res) => {
   res.render('ideas/add');
 });
 
-// Processar formulário
+
+// Process form
 app.post('/ideas', (req, res) => {
 
-//Validação de campos vazios no lado do servidor.
+  //Validating empty fields on the server side
   let errors = [];
 
-   if (!req.body.title) {
-     errors.push({text: 'Por favor adicione um título.'});
-   }
-   if (!req.body.details) {
-     errors.push({text: 'Por favor adicione detalhes.'});
-   }
+  if (!req.body.title) {
+    errors.push({
+      text: 'Por favor adicione um título.'
+    });
+  }
+  if (!req.body.details) {
+    errors.push({
+      text: 'Por favor adicione detalhes.'
+    });
+  }
 
-   if(errors.length > 0){ 
-     res.render('ideas/add', {
-       errors: errors,
-       title: req.body.title,
-       details: req.body.details
-     });
-   } else {
-     const newUser = {
-       title: req.body.title,
-       details: req.body.details
-     }
-     new Idea(newUser)
-     .save()
-     .then(idea => {
-       res.redirect('/ideas');
-     })
-   }
+  if (errors.length > 0) {
+    res.render('ideas/add', {
+      errors: errors,
+      title: req.body.title,
+      details: req.body.details
+    });
+  } else {
+    const newUser = {
+      title: req.body.title,
+      details: req.body.details
+    }
+    new Idea(newUser)
+      .save()
+      .then(idea => {
+        res.redirect('/ideas');
+      })
+  }
 });
 
 
