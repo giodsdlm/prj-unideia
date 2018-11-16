@@ -52,7 +52,7 @@ app.use(session({
 app.use(flash());
 
 //Global Variables
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -78,10 +78,12 @@ app.get('/about', (req, res) => {
 // Idea Index Page
 app.get('/ideas', (req, res) => {
   Idea.find({})
-    .sort({date:'desc'})
-    .then(ideas =>{
+    .sort({
+      date: 'desc'
+    })
+    .then(ideas => {
       res.render('ideas/index', {
-        ideas:ideas
+        ideas: ideas
       });
     });
 });
@@ -95,13 +97,13 @@ app.get('/ideas/add', (req, res) => {
 // Edit ideas form
 app.get('/ideas/edit/:id', (req, res) => {
   Idea.findOne({
-    _id: req.params.id,
-  })
-  .then(idea => {
-    res.render('ideas/edit', {
-      idea:idea
-    });
-  })
+      _id: req.params.id,
+    })
+    .then(idea => {
+      res.render('ideas/edit', {
+        idea: idea
+      });
+    })
 });
 
 
@@ -136,36 +138,40 @@ app.post('/ideas', (req, res) => {
     new Idea(newUser)
       .save()
       .then(idea => {
+        req.flash('success_msg', 'Nova ideia adicionada!');
         res.redirect('/ideas');
       })
   }
 });
 
 // Edit form process
-app.put('/ideas/:id', (req, res) =>{
+app.put('/ideas/:id', (req, res) => {
   Idea.findOne({
-    _id: req.params.id
-  })
-  .then(idea => {
-    //new values
-    idea.title = req.body.title;
-    idea.details = req.body.details;
+      _id: req.params.id
+    })
+    .then(idea => {
+      //new values
+      idea.title = req.body.title;
+      idea.details = req.body.details;
 
-    idea.save()
-      .then(idea => {
-        res.redirect('/ideas');
-      })
-  });
+      idea.save()
+        .then(idea => {
+          req.flash('success_msg', 'A Ideia foi atualizada!');
+          res.redirect('/ideas');
+        })
+    });
 });
 
 
 // Delete Process
 app.delete('/ideas/:id', (req, res) => {
-Idea.deleteOne({_id:req.params.id})
-  .then(() => {
-    req.flash('success_msg', 'Ideia removida!');
-    res.redirect('/ideas');
-  });
+  Idea.deleteOne({
+      _id: req.params.id
+    })
+    .then(() => {
+      req.flash('success_msg', 'Ideia removida!');
+      res.redirect('/ideas');
+    });
 });
 
 
