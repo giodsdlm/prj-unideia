@@ -137,6 +137,15 @@ app.put('/ideas/:id', (req, res) =>{
 });
 
 
+// Delete Process
+app.delete('/ideas/:id', (req, res) => {
+Idea.deleteOne({_id:req.params.id})
+  .then(() => {
+    res.redirect('/ideas');
+  });
+});
+
+
 const port = 5000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

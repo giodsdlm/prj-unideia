@@ -1,10 +1,16 @@
 <div class="card-columns">
   {{#each ideas}}
-  <div class="card mb-2">
+  <div class="card mb-3">
     <div class="card-body">
       <h4>{{title}}</h4>
       <p>{{details}}</p>
-      <a class="btn btn-outline-dark btn-sm" href="/ideas/edit/{{id}}">Editar</a>
+      <a class="btn btn-outline-dark btn-sm float-sm-left mr-2 mb-3" href="/ideas/edit/{{id}}">Editar</a>
+      <div class="float-sm-left">
+        <form method="post" action="/ideas/{{id}}?_method=DELETE">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" class="btn btn-outline-danger btn-sm mr-2" value="Excluir">
+        </form>
+      </div>
     </div>
   </div>
 
