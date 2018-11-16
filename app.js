@@ -3,6 +3,9 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
+const flash = require('connect-flash');
+const session = require('express-session');
+
 
 const app = express();
 
@@ -36,6 +39,25 @@ app.use(bodyParser.json());
 // Method override Middleware
 app.use(methodOverride('_method'));
 
+
+// Express Session
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+
+// Connect Flash
+app.use(flash());
+
+//Global Variables
+app.use(function(req, res, next){
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 
 // Index Route
@@ -141,6 +163,7 @@ app.put('/ideas/:id', (req, res) =>{
 app.delete('/ideas/:id', (req, res) => {
 Idea.deleteOne({_id:req.params.id})
   .then(() => {
+    req.flash('success_msg', 'Ideia removida!');
     res.redirect('/ideas');
   });
 });
