@@ -2,3 +2,10 @@
   width: 130px;
   margin: auto;
 }
+.logo-nav {
+  width: 80px;
+  margin: auto;
+}
+body {
+  font-family: 'Arvo', serif;
+}
