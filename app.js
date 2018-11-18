@@ -17,6 +17,8 @@ const users = require('./routes/users');
 // Passport config
 require('./config/passport')(passport);
 
+//Map global promise - get rid of warning
+mongoose.Promise = global.Promise;
 
 // Connect to Mongoose and defining project database
 mongoose.connect('mongodb://localhost/unideia-dev', {
@@ -24,7 +26,6 @@ mongoose.connect('mongodb://localhost/unideia-dev', {
   }) //promise
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
-
 
 // Handlebars Middleware
 app.engine('handlebars', exphbs({
@@ -54,6 +55,11 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
 }));
+
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Connect Flash

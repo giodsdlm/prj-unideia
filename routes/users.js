@@ -9,12 +9,12 @@ require('../models/User');
 const User = mongoose.model('users');
 
 
-// User Login Rout
+// User Login Route
 router.get('/login', (req, res) => {
   res.render('users/login');
 })
 
-// User Register Rout
+// User Register Route
 router.get('/register', (req, res) => {
   res.render('users/register');
 })
@@ -22,11 +22,10 @@ router.get('/register', (req, res) => {
 // Login Form POST
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    sucessRedirect:'/ideas',
+    successRedirect: '/ideas',
     failureRedirect: '/users/login',
     failureFlash: true
-  }) (req, res, next);
-
+  })(req, res, next);
 });
 
 
@@ -89,4 +88,5 @@ router.post('/register', (req, res) => {
       })
   }
 });
+
 module.exports = router;
