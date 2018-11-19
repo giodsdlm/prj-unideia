@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const {ensureAuthenticated} = require('../helpers/auth');
+const {
+  ensureAuthenticated
+} = require('../helpers/auth');
 
 // Load Idea Model
 require('../models/Idea');
@@ -9,7 +11,7 @@ const Idea = mongoose.model('ideas');
 
 // Idea Index Page
 router.get('/', ensureAuthenticated, (req, res) => {
-  Idea.find({})
+  Idea.find({user: req.user.id})
     .sort({
       date: 'desc'
     })
@@ -32,9 +34,14 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
       _id: req.params.id,
     })
     .then(idea => {
-      res.render('ideas/edit', {
-        idea: idea
-      });
+      if (idea.user != req.user.id) {
+        req.flash('error_msg', 'Acesso não autorizado.');
+        res.redirect('/ideas');
+      } else {
+        res.render('ideas/edit', {
+          idea: idea
+        });
+      }
     })
 });
 
@@ -65,7 +72,8 @@ router.post('/', ensureAuthenticated, (req, res) => {
   } else {
     const newUser = {
       title: req.body.title,
-      details: req.body.details
+      details: req.body.details,
+      user: req.user.id
     }
     new Idea(newUser)
       .save()
@@ -96,7 +104,7 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
 
 
 // Delete Process
-router.delete('/:id', ensureAuthenticated,  (req, res) => {
+router.delete('/:id', ensureAuthenticated, (req, res) => {
   Idea.deleteOne({
       _id: req.params.id
     })
