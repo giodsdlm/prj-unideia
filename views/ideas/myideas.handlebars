@@ -4,6 +4,13 @@
     <h4 class="card-header">{{title}}</h4>
     <div class="card-body">
       <p>{{details}}</p>
+      <a class="btn btn-outline-dark btn-sm float-sm-left mr-2 mb-3" href="/ideas/edit/{{id}}">Editar</a>
+      <div class="float-sm-left">
+        <form method="post" action="/ideas/{{id}}?_method=DELETE">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" class="btn btn-outline-danger btn-sm mr-2" value="Excluir">
+        </form>
+      </div>
       <div class="text-muted text-right">
         <small>
           <input type="text" class="form-control-plaintext" placeholder="Autor: {{user}}">

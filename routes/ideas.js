@@ -9,9 +9,22 @@ const {
 require('../models/Idea');
 const Idea = mongoose.model('ideas');
 
-// Idea Index Page
-router.get('/', ensureAuthenticated, (req, res) => {
+// User Idea Index Page
+router.get('/myideas', ensureAuthenticated, (req, res) => {
   Idea.find({user: req.user.id})
+    .sort({
+      date: 'desc'
+    })
+    .then(ideas => {
+      res.render('ideas/myideas', {
+        ideas: ideas
+      });
+    });
+});
+
+// General Idea Index Page
+router.get('/', ensureAuthenticated, (req, res) => {
+  Idea.find({})
     .sort({
       date: 'desc'
     })
@@ -30,6 +43,7 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 
 // Edit ideas form
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
+  
   Idea.findOne({
       _id: req.params.id,
     })

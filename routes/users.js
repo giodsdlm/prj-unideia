@@ -25,8 +25,11 @@ router.post('/login', (req, res, next) => {
     successRedirect: '/ideas',
     failureRedirect: '/users/login',
     failureFlash: true
-  })(req, res, next);
+  })(req, res, next)
+
 });
+
+;
 
 
 //Register Form POST -validating the password rules

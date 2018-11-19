@@ -31,7 +31,7 @@ module.exports = function (passport) {
       })
     })
   }));
-  // console.log();
+  
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
