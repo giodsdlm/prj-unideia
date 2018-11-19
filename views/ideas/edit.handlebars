@@ -3,8 +3,6 @@
 {{else}}
 
 {{/each}}
-
-
 <div class="card card-body">
   <h3>Editar Ideia</h3>
   <form action="/ideas/{{idea.id}}?_method=PUT" method="POST">
@@ -17,6 +15,6 @@
       <label for="details">Detalhes</label>
       <textarea type="text" class="form-control" name="details" required>{{idea.details}}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-outline-primary">Salvar</button>
   </form>
 </div>
