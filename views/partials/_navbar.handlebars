@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
   <div class="container">
-    <a class="navbar-brand" href="/"><img class = "logo-nav" alt= "Unideia" src="../img/logo-128px.png">Unideia!</a>
+    <a class="navbar-brand" href="/"><img class="logo-nav" alt="Unideia" src="../img/logo-128px.png">Unideia!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,20 +15,26 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="/users/login" class="nav-link">Entrar</a>
-        </li>
-         <li class="nav-item">
-          <a href="/users/register" class="nav-link">Cadastre-se</a>
-        </li>
+        {{#if user}}
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id='navbarDropdownMenuLink'>Ideias de
             Sistemas</a>
-            <div class="dropdown-menu">
-              <a href="/ideas" class="dropdown-item">Visualizar ideias</a>
-              <a href="/ideas/add" class="dropdown-item">Compartilhar nova ideia</a>
-            </div>
+          <div class="dropdown-menu">
+            <a href="/ideas" class="dropdown-item">Visualizar ideias</a>
+            <a href="/ideas/add" class="dropdown-item">Compartilhar nova ideia</a>
+          </div>
         </li>
+        <li class="nav-item">
+          <a href="/users/logout" class="nav-link">Sair</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a href="/users/login" class="nav-link">Entrar</a>
+        </li>
+        <li class="nav-item">
+          <a href="/users/register" class="nav-link">Cadastre-se</a>
+        </li>
+        {{/if}}
       </ul>
     </div>
   </div>
