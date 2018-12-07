@@ -11,11 +11,9 @@ const IdeaSchema = new Schema({
     type: String,
     required: true
   },
-  topic: {
-    materias:{ type: String},
+  area: {    
     type: Array,
     required: true
-
   },
   user: {
     type: String,
