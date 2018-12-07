@@ -87,7 +87,9 @@ router.post('/', ensureAuthenticated, (req, res) => {
     const newUser = {
       title: req.body.title,
       details: req.body.details,
-      user: req.user.id
+      user: req.user.id, 
+      autor: req.user.name,
+      email: req.user.email
     }
     new Idea(newUser)
       .save()
