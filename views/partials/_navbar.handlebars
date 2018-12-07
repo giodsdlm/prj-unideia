@@ -1,5 +1,16 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
   <div class="container">
+    <div class="sidenav">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
+
     <a class="navbar-brand" href="/"><img class="logo-nav" alt="Unideia" src="../img/logo-128px.png">Unideia!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -38,4 +49,6 @@
       </ul>
     </div>
   </div>
+
+
 </nav>
