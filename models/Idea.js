@@ -11,7 +11,7 @@ const IdeaSchema = new Schema({
     type: String,
     required: true
   },
-  tema: {    
+  theme: {    
     type: String,
     required: true
   },

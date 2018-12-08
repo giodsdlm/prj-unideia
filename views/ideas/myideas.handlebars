@@ -1,24 +1,27 @@
-<div class="card-columns">
+<div class="card-grid">
   {{#each ideas}}
-  <div class="card mb-3">
-    <h4 class="card-header">{{title}}</h4>
+  <div class="card mb-4">
+    <h4 class="card-header">{{title}}
+      <form method="post" action="/ideas/{{id}}?_method=DELETE">
+        <a class="btn btn-outline-primary  mt-3" href="/ideas/edit/{{id}}">Editar</a>
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" class="btn btn-danger mt-3" value="Excluir">
+      </form>
+    </h4>
     <div class="card-body">
       <p>{{details}}</p>
-      <a class="btn btn-outline-dark btn-sm float-sm-left mr-2 mb-3" href="/ideas/edit/{{id}}">Editar</a>
-      <div class="float-sm-left">
-        <form method="post" action="/ideas/{{id}}?_method=DELETE">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="submit" class="btn btn-outline-danger btn-sm mr-2" value="Excluir">
-        </form>
-      </div>
-      <div class="text-muted text-right">
-        <small>
-          <input type="text" class="form-control-plaintext" placeholder="Autor: {{autor}}">
-          <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
-        </small>
-      </div>
+      <small>
+        <input type="text" class="form-control-plaintext" type="text" placeholder="Curso: {{tema}}" readonly>
+      </small>
+    </div>
+    <div class="card-footer text-muted text-right">
+      <small>
+        <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}} em {{date}}">
+        <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
+      </small>
     </div>
   </div>
+
 
   {{else}}
 </div>

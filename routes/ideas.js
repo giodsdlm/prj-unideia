@@ -49,36 +49,45 @@ router.get('/add', ensureAuthenticated, (req, res) => {
         req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
         res.redirect('/ideas');
       } else {
-      res.render('ideas/add', {
-      themes: themes
-      });
-    }
-    })
-});
-
-
-// Edit ideas form
-router.get('/edit/:id', ensureAuthenticated, (req, res) => {
-
-  Idea.findOne({
-      _id: req.params.id,
-    })
-    .then(idea => {
-      if (idea.user != req.user.id) {
-        req.flash('error_msg', 'Acesso não autorizado.');
-        res.redirect('/ideas');
-      } else {
-        res.render('ideas/edit', {
-          idea: idea
+        res.render('ideas/add', {
+          themes: themes
         });
       }
     })
 });
 
 
+// Edit ideas form
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
+  Theme.find({})
+    .then(themes => {
+      if (!themes) {
+        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
+        res.redirect('/ideas');
+      } else {
+        Idea.findOne({
+            _id: req.params.id,
+          })
+          .then(idea => {
+            if (idea.user != req.user.id) {
+              req.flash('error_msg', 'Acesso não autorizado.');
+              res.redirect('/ideas');
+            } else {
+              res.render('ideas/edit', {
+                themes: themes,
+                idea: idea
+              });
+            }
+          })
+      }
+    });
+});
+
+
 // Process form
 router.post('/', ensureAuthenticated, (req, res) => {
 
+ 
   //Validating empty fields on the server side
   let errors = [];
 
@@ -97,7 +106,8 @@ router.post('/', ensureAuthenticated, (req, res) => {
     res.render('/add', {
       errors: errors,
       title: req.body.title,
-      details: req.body.details
+      details: req.body.details,
+      tema: req.body.theme
     });
   } else {
     const newUser = {
@@ -126,7 +136,7 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
       //new values
       idea.title = req.body.title;
       idea.details = req.body.details;
-
+      idea.tema = req.body.theme;
       idea.save()
         .then(idea => {
           req.flash('success_msg', 'Alteração registrada com sucesso.');
