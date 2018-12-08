@@ -7,8 +7,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
-
 const app = express();
+
 
 // Load Routes
 const ideas = require('./routes/ideas');
