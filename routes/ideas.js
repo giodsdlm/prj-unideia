@@ -9,9 +9,15 @@ const {
 require('../models/Idea');
 const Idea = mongoose.model('ideas');
 
+//Load Theme Model
+require('../models/Theme');
+const Theme = mongoose.model('themes');
+
 // User Idea Index Page
 router.get('/myideas', ensureAuthenticated, (req, res) => {
-  Idea.find({user: req.user.id})
+  Idea.find({
+      user: req.user.id
+    })
     .sort({
       date: 'desc'
     })
@@ -37,13 +43,23 @@ router.get('/', ensureAuthenticated, (req, res) => {
 
 // Add ideas form
 router.get('/add', ensureAuthenticated, (req, res) => {
-  res.render('ideas/add');
+  Theme.find({})
+    .then(themes => {
+      if (!themes) {
+        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
+        res.redirect('/ideas');
+      } else {
+      res.render('ideas/add', {
+      themes: themes
+      });
+    }
+    })
 });
 
 
 // Edit ideas form
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
-  
+
   Idea.findOne({
       _id: req.params.id,
     })
@@ -87,9 +103,10 @@ router.post('/', ensureAuthenticated, (req, res) => {
     const newUser = {
       title: req.body.title,
       details: req.body.details,
-      user: req.user.id, 
+      user: req.user.id,
       autor: req.user.name,
-      email: req.user.email
+      email: req.user.email,
+      tema: req.body.theme
     }
     new Idea(newUser)
       .save()
