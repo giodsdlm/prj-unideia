@@ -7,8 +7,15 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const Handlebars = require("handlebars");
+const MomentHandler = require("handlebars.moment");
+
 const app = express();
 
+MomentHandler.registerHelpers(Handlebars);
+
+let moment = require('moment');
+require('moment/locale/pt-br.js');
 
 // Load Routes
 const ideas = require('./routes/ideas');

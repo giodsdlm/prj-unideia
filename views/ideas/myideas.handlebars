@@ -1,28 +1,36 @@
 <div class="card-grid">
   {{#each ideas}}
   <div class="card mb-4">
-    <h4 class="card-header">{{title}}
-      <form method="post" action="/ideas/{{id}}?_method=DELETE">
-        <a class="btn btn-outline-primary  mt-3" href="/ideas/edit/{{id}}">Editar</a>
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" class="btn btn-danger mt-3" value="Excluir">
-      </form>
-    </h4>
+    <h4 class="card-header">{{title}}</h4>
     <div class="card-body">
       <p>{{details}}</p>
       <small>
         <input type="text" class="form-control-plaintext" type="text" placeholder="Curso: {{tema}}" readonly>
       </small>
     </div>
-    <div class="card-footer text-muted text-right">
-      <small>
-        <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}} em {{date}}">
-        <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
-      </small>
+    <div class="container card-footer text-muted text-right">
+      <div class="row">
+        <div class="col-sm-10">
+          <small>
+            <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}}">
+            <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
+            <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
+          </small>
+        </div>
+        <div class="col-sm-2">
+          <div class="row">
+            <a class="btn btn-outline-primary btn-block mt-2" href="/ideas/edit/{{id}}">Editar</a>
+          </div>
+          <form method="post" action="/ideas/{{id}}?_method=DELETE">
+          <div class="row">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" class="btn btn-danger btn-block mt-2" value="Excluir">
+          </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-
-
   {{else}}
 </div>
 <div class="jumbotron text-center">
