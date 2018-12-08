@@ -11,8 +11,8 @@ const IdeaSchema = new Schema({
     type: String,
     required: true
   },
-  area: {    
-    type: Array,
+  tema: {    
+    type: String,
     required: true
   },
   user: {
