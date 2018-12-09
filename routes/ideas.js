@@ -1,6 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
+const bodyParser = require('body-parser');
+const app = express();
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json())
+
 const {
   ensureAuthenticated
 } = require('../helpers/auth');
@@ -28,24 +39,11 @@ router.get('/myideas', ensureAuthenticated, (req, res) => {
     });
 });
 
-// // General Idea Index Page
-// router.get('/', ensureAuthenticated, (req, res) => {
-//   Idea.find({})
-//     .sort({
-//       date: 'desc'
-//     })
-//     .then(ideas => {
-//       res.render('ideas/index', {
-//         ideas: ideas
-//       });
-//     });
-// });
-
-
-
 // General Idea Index Page
 router.get('/', ensureAuthenticated, (req, res) => {
-  Theme.find({})
+  Theme.find({}).sort({
+      date: 'desc'
+    })
     .then(themes => {
       if (!themes) {
         req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
@@ -67,11 +65,9 @@ router.get('/', ensureAuthenticated, (req, res) => {
             }
           });
       }
+
     });
 });
-
-
-
 
 
 // Add ideas form
@@ -88,34 +84,6 @@ router.get('/add', ensureAuthenticated, (req, res) => {
       }
     })
 });
-
-
-// Edit ideas form
-router.get('/edit/:id', ensureAuthenticated, (req, res) => {
-  Theme.find({})
-    .then(themes => {
-      if (!themes) {
-        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
-        res.redirect('/ideas');
-      } else {
-        Idea.findOne({
-            _id: req.params.id,
-          })
-          .then(idea => {
-            if (idea.user != req.user.id) {
-              req.flash('error_msg', 'Acesso não autorizado.');
-              res.redirect('/ideas');
-            } else {
-              res.render('ideas/edit', {
-                themes: themes,
-                idea: idea
-              });
-            }
-          })
-      }
-    });
-});
-
 
 // Process form
 router.post('/', ensureAuthenticated, (req, res) => {
@@ -160,6 +128,32 @@ router.post('/', ensureAuthenticated, (req, res) => {
   }
 });
 
+// Edit ideas form
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
+  Theme.find({})
+    .then(themes => {
+      if (!themes) {
+        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
+        res.redirect('/ideas');
+      } else {
+        Idea.findOne({
+            _id: req.params.id,
+          })
+          .then(idea => {
+            if (idea.user != req.user.id) {
+              req.flash('error_msg', 'Acesso não autorizado.');
+              res.redirect('/ideas');
+            } else {
+              res.render('ideas/edit', {
+                themes: themes,
+                idea: idea
+              });
+            }
+          })
+      }
+    });
+});
+
 // Edit form process
 router.put('/:id', ensureAuthenticated, (req, res) => {
   Idea.findOne({
@@ -177,6 +171,53 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
         })
     });
 });
+
+
+router.post('/search', ensureAuthenticated, (req, res) => {
+  var teste = req.body.title
+  Idea.find({
+      tema: teste
+    })
+    .sort({
+      date: 'desc'
+    })
+    .then(ideas => {
+      if (!ideas) {
+        req.flash('error_msg', 'Acesso não autorizado.');
+        res.redirect('/ideas');
+      } else {
+        res.render(
+          'ideas/result', {
+            ideas: ideas
+          });
+      }
+    });
+});
+
+// // Result form
+// router.get('/search', ensureAuthenticated, (req, res) => {
+//   var teste = req.body.title
+//   console.log(teste)
+//   Idea.find({
+//       tema: teste
+//     })
+//     .sort({
+//       date: 'desc'
+//     })
+//     .then(ideas => {
+//       if (!ideas) {
+//         req.flash('error_msg', 'Acesso não autorizado.');
+//         res.redirect('/ideas');
+//       } else {
+//         res.render(
+//           'ideas/result', {
+//             ideas: ideas
+//           });
+//       }
+//     })
+// });
+
+
 
 
 // Delete Process
