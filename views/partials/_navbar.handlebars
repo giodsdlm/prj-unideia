@@ -15,23 +15,13 @@
     <ul class="navbar-nav ml-auto">
       {{#if user}}
 
-      
-      <ul class="nav nav-pills nav-fill">
-        <form class="form-inline">
-          <label for="theme">Curso:</label>
-          <select class="form-control mr-md-3" name="search" placeholder="Pesquisa" aria-label="search">{{#each
-            themes}}
-            <option>{{curso}}</option>
-            {{/each}}
-          </select>
-          <button class="btn btn-dark my-2 mr-2 my-sm-0" type="submit">Filtrar</button>
-        </form>
+      <ul class="nav nav-fill">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="collapse" data-target="#detalhes" aria-expanded="false" aria-controls="detalhes"
+          <a class="nav-link navbar-brand" data-toggle="collapse" data-target="#detalhes" aria-expanded="false" aria-controls="detalhes"
             href="#">+ detalhes</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active ml-2" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          <a class="nav-link dropdown-toggle navbar-brand ml-2" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
             aria-expanded="false">Opções</a>
           <div class="dropdown-menu">
             <a href="/ideas/myideas" class="dropdown-item">Minhas sugestões</a>
@@ -51,7 +41,4 @@
         {{/if}}
       </ul>
   </div>
-  </div>
-
-
 </nav>
