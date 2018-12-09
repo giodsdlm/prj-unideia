@@ -70,6 +70,13 @@ router.post('/register', (req, res) => {
             email: req.body.email,
             password: req.body.password
           });
+
+          if (req.body.profile == 'Desenvolver') {
+            newUser.developer = true;
+          } else {
+            newUser.developer = false;
+          }
+
           //Hash para a senha
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {

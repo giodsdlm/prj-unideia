@@ -19,6 +19,10 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  developer: {
+    type: Boolean,
+    required: true
   }
 });
 mongoose.model('users', UserSchema);
