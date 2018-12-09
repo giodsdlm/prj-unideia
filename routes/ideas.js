@@ -28,18 +28,51 @@ router.get('/myideas', ensureAuthenticated, (req, res) => {
     });
 });
 
+// // General Idea Index Page
+// router.get('/', ensureAuthenticated, (req, res) => {
+//   Idea.find({})
+//     .sort({
+//       date: 'desc'
+//     })
+//     .then(ideas => {
+//       res.render('ideas/index', {
+//         ideas: ideas
+//       });
+//     });
+// });
+
+
+
 // General Idea Index Page
 router.get('/', ensureAuthenticated, (req, res) => {
-  Idea.find({})
-    .sort({
-      date: 'desc'
-    })
-    .then(ideas => {
-      res.render('ideas/index', {
-        ideas: ideas
-      });
+  Theme.find({})
+    .then(themes => {
+      if (!themes) {
+        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
+        res.redirect('/ideas');
+      } else {
+        Idea.find({})
+          .sort({
+            date: 'desc'
+          })
+          .then(ideas => {
+            if (!ideas) {
+              req.flash('error_msg', 'Acesso não autorizado.');
+              res.redirect('/ideas');
+            } else {
+              res.render('ideas/index', {
+                ideas: ideas,
+                themes: themes
+              });
+            }
+          });
+      }
     });
 });
+
+
+
+
 
 // Add ideas form
 router.get('/add', ensureAuthenticated, (req, res) => {
@@ -87,7 +120,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
 // Process form
 router.post('/', ensureAuthenticated, (req, res) => {
 
- 
+
   //Validating empty fields on the server side
   let errors = [];
 

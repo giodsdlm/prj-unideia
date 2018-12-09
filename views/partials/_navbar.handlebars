@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-info mb-3">
   <div class="container">
     <div class="sidenav">
       <div id="mySidenav" class="sidenav">
@@ -9,30 +9,38 @@
         <a href="/about">Sobre a U!</a>
       </div>
     </div>
-    <span style="cursor:pointer" onclick="openNav()">&#9776; </span>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
 
     <a class="navbar-brand" href="/"><img class="logo-nav" alt="Unideia" src="../img/logo-128px.png"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto">
+      {{#if user}}
 
-
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        {{#if user}}
+      
+      <ul class="nav nav-pills nav-fill">
+        <form class="form-inline">
+          <label for="theme">Curso:</label>
+          <select class="form-control mr-md-3" name="search" placeholder="Pesquisa" aria-label="search">{{#each
+            themes}}
+            <option>{{curso}}</option>
+            {{/each}}
+          </select>
+          <button class="btn btn-dark my-2 mr-2 my-sm-0" type="submit">Filtrar</button>
+        </form>
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="collapse" data-target="#detalhes" aria-expanded="false" aria-controls="detalhes"
+            href="#">+ detalhes</a>
+        </li>
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" class="navbar-toggler-icon"data-toggle="dropdown" id='navbarDropdownMenuLink'>Opções</a>
+          <a class="nav-link dropdown-toggle active ml-2" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">Opções</a>
           <div class="dropdown-menu">
-            <a href="/ideas/myideas" class="dropdown-item">Visualizar sugestões</a>
-            <a href="/ideas/add" class="dropdown-item">Adicionar nova</a>
+            <a href="/ideas/myideas" class="dropdown-item">Minhas sugestões</a>
+            <a href="/ideas/add" class="dropdown-item">Adicionar ideia</a>
+            <div class="dropdown-divider"></div>
+            <a href="/users/logout" class="dropdown-item">Sair</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a href="/users/logout" class="nav-link">Sair</a>
-        </li>
+
         {{else}}
         <li class="nav-item">
           <a href="/users/login" class="nav-link">Entrar</a>
@@ -42,7 +50,7 @@
         </li>
         {{/if}}
       </ul>
-    </div>
+  </div>
   </div>
 
 

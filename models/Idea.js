@@ -30,6 +30,15 @@ const IdeaSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  dev: {
+    type: String
+  },
+  devId: {
+    type: String
+  },
+  status: {
+    type: String
   }
 });
 

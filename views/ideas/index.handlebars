@@ -1,20 +1,23 @@
 <div class="card-columns">
   {{#each ideas}}
   <div class="card border-dark mb-3">
-    <h3 class="card-header">{{title}}</h3>
+    <h4 class="card-header">{{title}}</h4>
     <div class="card-body">
       <blockquote class="blockquote mb-0">
-        <h5>{{details}}</h5>
-        <footer class="blockquote-footer">Curso: <cite title="curso">{{tema}}</cite></footer>
-
+        <h6>{{details}}</h6>
+        <footer class="blockquote-footer">Curso: <cite title="curso">{{tema}}</cite>
+        </footer>
       </blockquote>
     </div>
-    <div class="card-footer text-muted text-right">
-      <small>
-        <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}}">
-        <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
-        <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
-      </small>
+
+    <div class="collapse" id="detalhes">
+      <div class="card-footer text-muted text-right">
+        <small>
+          <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}}">
+          <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
+          <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
+        </small>
+      </div>
     </div>
   </div>
   {{else}}
