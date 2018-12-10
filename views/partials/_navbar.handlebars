@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-info mb-3">
+{{!--<nav class="navbar sticky-top navbar-expand-sm nav-tabs navbar-dark bg-info mb-3">
   <div class="container">
     <div class="sidenav">
       <div id="mySidenav" class="sidenav">
@@ -11,34 +11,65 @@
     </div>
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
 
-    <a class="navbar-brand" href="/"><img class="logo-nav" alt="Unideia" src="../img/logo-128px.png"></a>
-    <ul class="navbar-nav ml-auto">
+    <a class="navbar-brand" href="/">
+      <img class="logo-nav" alt="Unideia" src="../img/logo-128px.png">Portal U!</a>
+    <ul class="navbar-nav  ml-auto">
       {{#if user}}
+      <li class="nav-item nav-tabs">
+        <a class="nav-link " data-toggle="collapse" data-target="#detalhes" aria-expanded="false" aria-controls="detalhes"
+          href="#">Expandir</a>
+      <li class="nav-item nav-pills dropdown">
+        <a class="nav-link dropdown-toggle active mt-1 ml-2" data-toggle="dropdown" href="#" role="button"
+          aria-haspopup="true" aria-expanded="tru">Opções</a>
+        <div class="dropdown-menu">
+          <a href="/ideas/myideas" class="dropdown-item">Minhas sugestões</a>
+          <a href="/ideas/add" class="dropdown-item">Adicionar ideia</a>
+          <div class="dropdown-divider"></div>
+          <a href="/users/logout" class="dropdown-item">Sair</a>
+        </div>
+      </li>
 
-      <ul class="nav nav-fill">
-        <li class="nav-item">
-          <a class="nav-link navbar-brand" data-toggle="collapse" data-target="#detalhes" aria-expanded="false" aria-controls="detalhes"
-            href="#">+ detalhes</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle navbar-brand ml-2" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Opções</a>
-          <div class="dropdown-menu">
-            <a href="/ideas/myideas" class="dropdown-item">Minhas sugestões</a>
-            <a href="/ideas/add" class="dropdown-item">Adicionar ideia</a>
-            <div class="dropdown-divider"></div>
-            <a href="/users/logout" class="dropdown-item">Sair</a>
-          </div>
-        </li>
+      {{else}}
+      <li class="nav-item">
+        <a href="/users/login" class="nav-link">Entrar</a>
+      </li>
+      <li class="nav-item">
+        <a href="/users/register" class="nav-link">Cadastre-se</a>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav> --}}
 
-        {{else}}
-        <li class="nav-item">
-          <a href="/users/login" class="nav-link">Entrar</a>
-        </li>
-        <li class="nav-item">
-          <a href="/users/register" class="nav-link">Cadastre-se</a>
-        </li>
-        {{/if}}
-      </ul>
+
+<nav class="site-header py-1 sticky-top navbar-expand-sm nav-tabs mb-3">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <div class="sidenav">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a class="navbar-brand" href="/">Portal U!</a>
+        <a href="/ideas">Novas ideias</a>
+        <a href="#">Projetos em andamento</a>
+        <a href="/about">Sobre a U!</a>
+      </div>
+    </div>
+    <span class="py-4" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+    <a class="navbar-brand" href="/">
+      <img class="logo-nav" alt="Unideia" src="../img/logo-128px.png">
+   
+
+    <a class="py-4 d-none d-md-inline-block" href="#">Produto</a>
+    <a class="py-4 d-none d-md-inline-block" href="#">Tour</a>
+    <a class="py-4 d-none d-md-inline-block" href="#">Features</a>
+    <a class="py-4 d-none d-md-inline-block" href="#">Premium</a>
+    <a class="py-4 d-none d-md-inline-block" href="#">Suporte</a>
+    <a class="py-4 d-none d-md-inline-block" href="#">Preços</a>
+    <a class="py-4 d-none d-md-inline-block" href="#">Carrinho</a>
+
+
+
+
+
   </div>
 </nav>

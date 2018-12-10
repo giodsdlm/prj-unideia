@@ -29,8 +29,8 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
     crossorigin="anonymous"></script>
 
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-    crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
 
 </head>
 
@@ -61,6 +61,61 @@
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet">
+
+  <!-- in index.hbs -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+  <script>
+    var updatePostStats = {
+      Like: function (postId) {
+        document.querySelector('#likes-count-' + postId).textContent++;
+      },
+      Unlike: function (postId) {
+        document.querySelector('#likes-count-' + postId).textContent--;
+      }
+    };
+
+    var toggleButtonText = {
+      Like: function (button) {
+        button.textContent = "Unlike";
+      },
+      Unlike: function (button) {
+        button.textContent = "Like";
+      }
+    };
+
+    var actOnPost = function (event) {
+      var postId = event.target.dataset.postId;
+      var action = event.target.textContent.trim();
+      toggleButtonText[action](event.target);
+      updatePostStats[action](postId);
+      axios.post('/posts/' + postId + '/act', { action: action });
+    };
+  </script>
+  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
+  <script>
+    var pusher = new Pusher('your-app-id', {
+      cluster: 'your-app-cluster'
+    });
+    var socketId;
+
+    // retrieve the socket ID on successful connection
+    pusher.connection.bind('connected', function () {
+      socketId = pusher.connection.socket_id;
+    });
+
+
+    var channel = pusher.subscribe('post-events');
+    channel.bind('postAction', function (data) {
+      // log message data to console - for debugging purposes
+      console.log(data);
+      var action = data.action;
+      updatePostStats[action](data.postId);
+    });
+  </script>
 </body>
 
 </html>

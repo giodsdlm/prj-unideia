@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -13,6 +14,18 @@ const MomentHandler = require("handlebars.moment");
 const app = express();
 
 MomentHandler.registerHelpers(Handlebars);
+
+Handlebars.registerHelper('eachByIdx', function (context, options) {
+  var output = '';
+  var contextSorted = context.concat()
+    .sort(function (a, b) {
+      return a.idx - b.idx
+    });
+  for (var i = 0, j = contextSorted.length; i < j; i++) {
+    output += options.fn(contextSorted[i]);
+  }
+  return output;
+});
 
 let moment = require('moment');
 require('moment/locale/pt-br.js');
@@ -105,4 +118,19 @@ app.use('/users', users);
 const port = 5000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
+});
+
+
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+  appId: '668538',
+  key: '3154ba96ccf8e5ac9aa9',
+  secret: 'a4dad2727b18447496b0',
+  cluster: 'us2',
+  useTLS: true
+});
+
+pusher.trigger('my-channel', 'my-event', {
+  "message": "hello world"
 });

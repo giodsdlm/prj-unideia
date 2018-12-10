@@ -1,27 +1,31 @@
- <form action="/ideas/search" method="POST">
-<div class="form-group">
-  <label for="theme">Curso interessado:</label>
-  <select id="title" name="title">
-    {{#each themes}}
-    <option value="{{curso}}" selected="selected">{{curso}}</option>
-    {{/each}}
-  </select>
-</div>
-<button type="submit" class="btn btn-info">Pesquisar</button>
+<form action="/ideas/search" method="POST">
+  <div class="form-group">
+    <label for="theme">Pesquisar</label>
+    <select id="title" name="title">
+      {{#each themes}}
+      <option value="{{curso}}" selected="selected">{{curso}}</option>
+      {{/each}}
+    </select>
+    <button type="submit" class="btn mb-2 ml-2 btn-dark">Enviar</button>
+    <a class="btn btn-primary mb-2 ml-2 " data-toggle="collapse" data-target="#detalhes" aria-expanded="false"
+      aria-controls="detalhes" href="#">Detalhar</a>
 </form>
+</div>
 <div class="container">
   <div class="card-columns">
     {{#each ideas}}
-    <div class="card border-dark mt-3 mb-3">
-      <h4 class="card-header">{{title}}</h4>
+    <div class="card border-info mt-3 mb-3">
+      <h4 class="card-header text-white" id="cardb">{{title}}</h4>
       <div class="card-body">
+
         <blockquote class="blockquote mb-0">
           <h6>{{details}}</h6>
-          <footer class="blockquote-footer">Curso: <cite title="curso">{{tema}}</cite>
+          <footer class="blockquote-footer">{{tema}}</cite>
           </footer>
         </blockquote>
       </div>
-
+      <label class="btn ml-3 mb-2 mr-2 btn-xs btn-outline-warning" type="submit" onclick="actOnPost(event);" data-post-id="{{ this.id }}"><i class="fas fa-star"></i></label>
+          <span id="likes-count-{{ this.id }}">{{ this.likes_count }}</span>
       <div class="collapse" id="detalhes">
         <div class="card-footer text-muted text-right">
           <small>

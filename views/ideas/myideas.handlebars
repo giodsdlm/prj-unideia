@@ -1,42 +1,58 @@
-<div class="card-grid">
-  {{#each ideas}}
-  <div class="card border-dark mb-4">
-    <h4 class="card-header">{{title}}</h4>
-    <div class="card-body">
-      <p>{{details}}</p>
-      <small>
-        <input type="text" class="form-control-plaintext" type="text" placeholder="Curso: {{tema}}" readonly>
-      </small>
-    </div>
-    <div class="container card-footer text-muted text-right">
-      <div class="row">
-        <div class="col-sm-10">
-          <small>
-            <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}}">
-            <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
-            <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
-          </small>
-        </div>
-        <div class="col-sm-2">
+<form action="/ideas/search" method="POST">
+  <div class="form-group">
+    <label for="theme">Pesquisar</label>
+    <select id="title" name="title">
+      {{#each themes}}
+      <option value="{{curso}}" selected="selected">{{curso}}</option>
+      {{/each}}
+    </select>
+    <button type="submit" class="btn mb-2 ml-2 btn-info">Enviar</button>
+    <a class="btn btn-outline-warning mb-2 ml-2 " data-toggle="collapse" data-target="#detalhes" aria-expanded="false"
+      aria-controls="detalhes" href="#">Detalhar</a>
+  </div>
+</form>
+<div  class="container">
+  <div class="card-grid">
+    {{#each ideas}}
+    <div class="card border-dark mb-4">
+      <h4 class="card-header">{{title}}</h4>
+      <div class="card-body">
+        <p>{{details}}</p>
+        <small>
+          <input type="text" class="form-control-plaintext" type="text" placeholder="Curso: {{tema}}" readonly>
+        </small>
+      </div>
+      <div class="collapse" id="detalhes">
+        <div class="container card-footer text-muted text-right">
           <div class="row">
-            <a class="btn btn-outline-primary btn-block mt-2" href="/ideas/edit/{{id}}">Editar</a>
+            <div class="col-sm-10">
+              <small>
+                <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor}}">
+                <input type="text" class="form-control-plaintext" placeholder="Email: {{email}}">
+                <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
+              </small>
+            </div>
+            <div class="col-sm-2">
+              <div class="row">
+                <a class="btn btn-lg btn-primary btn-block mt-1" href="/ideas/edit/{{id}}">Editar</a>
+              </div>
+              <form method="post" action="/ideas/{{id}}?_method=DELETE">
+                <div class="row">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="submit" class="btn btn-danger btn-block btn-lg mt-2" value="Excluir">
+                </div>
+              </form>
+            </div>
           </div>
-          <form method="post" action="/ideas/{{id}}?_method=DELETE">
-          <div class="row">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" class="btn btn-danger btn-block mt-2" value="Excluir">
-          </div>
-          </form>
         </div>
       </div>
     </div>
+    {{else}}
   </div>
-  {{else}}
-</div>
-<div class="jumbotron text-center">
-  <h1 class="display-4"> :( </h1>
-  <h1 class="display-5">Nenhuma ideia encontrada.</h1>
-  <p class="lead">Você pode contribuir com uma nova clicando <a href="/ideas/add">aqui.</a>
-  </p>
-</div>
-{{/each}}
+  <div class="jumbotron text-center">
+    <h1 class="display-4"> :( </h1>
+    <h1 class="display-5">Nenhuma ideia encontrada.</h1>
+    <p class="lead">Você pode contribuir com uma nova clicando <a href="/ideas/add">aqui.</a>
+    </p>
+  </div>
+  {{/each}}

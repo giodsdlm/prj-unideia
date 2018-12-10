@@ -26,23 +26,41 @@ const Theme = mongoose.model('themes');
 
 // User Idea Index Page
 router.get('/myideas', ensureAuthenticated, (req, res) => {
-  Idea.find({
-      user: req.user.id
+  Theme.find({}).sort({
+      curso: 'asc'
     })
-    .sort({
-      date: 'desc'
-    })
-    .then(ideas => {
-      res.render('ideas/myideas', {
-        ideas: ideas
-      });
+    .then(themes => {
+      if (!themes) {
+        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
+        res.redirect('/ideas');
+      } else {
+        Idea.find({
+            user: req.user.id
+          })
+          .sort({
+            date: 'desc'
+          })
+          .then(ideas => {
+            if (!ideas) {
+              req.flash('error_msg', 'Acesso não autorizado.');
+              res.redirect('/ideas');
+            } else {
+              res.render('ideas/myideas', {
+                ideas: ideas,
+                themes: themes
+              });
+            }
+          })
+
+      }
+
     });
 });
 
 // General Idea Index Page
 router.get('/', ensureAuthenticated, (req, res) => {
   Theme.find({}).sort({
-      date: 'desc'
+      curso: 'asc'
     })
     .then(themes => {
       if (!themes) {
@@ -63,7 +81,8 @@ router.get('/', ensureAuthenticated, (req, res) => {
                 themes: themes
               });
             }
-          });
+          })
+
       }
 
     });
@@ -167,7 +186,7 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
       idea.save()
         .then(idea => {
           req.flash('success_msg', 'Alteração registrada com sucesso.');
-          res.redirect('/ideas');
+          res.redirect('/ideas/myideas');
         })
     });
 });
@@ -187,38 +206,12 @@ router.post('/search', ensureAuthenticated, (req, res) => {
         res.redirect('/ideas');
       } else {
         res.render(
-          'ideas/result', {
+          'ideas/search', {
             ideas: ideas
           });
       }
     });
 });
-
-// // Result form
-// router.get('/search', ensureAuthenticated, (req, res) => {
-//   var teste = req.body.title
-//   console.log(teste)
-//   Idea.find({
-//       tema: teste
-//     })
-//     .sort({
-//       date: 'desc'
-//     })
-//     .then(ideas => {
-//       if (!ideas) {
-//         req.flash('error_msg', 'Acesso não autorizado.');
-//         res.redirect('/ideas');
-//       } else {
-//         res.render(
-//           'ideas/result', {
-//             ideas: ideas
-//           });
-//       }
-//     })
-// });
-
-
-
 
 // Delete Process
 router.delete('/:id', ensureAuthenticated, (req, res) => {
@@ -229,6 +222,39 @@ router.delete('/:id', ensureAuthenticated, (req, res) => {
       req.flash('success_msg', 'Ideia removida!');
       res.redirect('/ideas');
     });
+});
+
+
+
+let Pusher = require('pusher');
+    let pusher = new Pusher({
+      appId: process.env.PUSHER_APP_ID,
+      key: process.env.PUSHER_APP_KEY,
+      secret: process.env.PUSHER_APP_SECRET,
+      cluster: process.env.PUSHER_APP_CLUSTER
+    });
+
+    router.post('/posts/:id/act', (req, res, next) => {
+        const action = req.body.action;
+        const counter = action === 'Like' ? 1 : -1;
+        Post.update({_id: req.params.id}, {$inc: {likes_count: counter}}, {}, (err, numberAffected) => {
+            pusher.trigger('post-events', 'postAction', { action: action, postId: req.params.id }, req.body.socketId);
+            res.send('');
+        });
+    });
+
+router.post('/posts/:id/act', (req, res, next) => {
+  const action = req.body.action;
+  const counter = action === 'Like' ? 1 : -1;
+  Post.update({
+    _id: req.params.id
+  }, {
+    $inc: {
+      likes_count: counter
+    }
+  }, {}, (err, numberAffected) => {
+    res.send('');
+  });
 });
 
 module.exports = router;

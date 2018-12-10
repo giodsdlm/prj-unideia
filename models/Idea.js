@@ -11,7 +11,7 @@ const IdeaSchema = new Schema({
     type: String,
     required: true
   },
-  tema: {    
+  tema: {
     type: String,
     required: true
   },
@@ -34,11 +34,11 @@ const IdeaSchema = new Schema({
   dev: {
     type: String
   },
-  devId: {
-    type: String
-  },
   status: {
     type: String
+  },
+  likes_count: {
+    type: Number
   }
 });
 
