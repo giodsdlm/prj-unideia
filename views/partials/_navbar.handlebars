@@ -44,6 +44,7 @@
 
 <nav class="site-header py-1 sticky-top navbar-expand-sm nav-tabs mb-3">
   <div class="container d-flex flex-column flex-md-row justify-content-between">
+
     <div class="sidenav">
       <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -54,21 +55,23 @@
       </div>
     </div>
     <span class="py-4" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <a class="logo-nav">
+      <a href="/"><img class="logo-nav" alt="Unideia" src="../img/logo-128px.png"></a></a>
 
-    <a class="navbar-brand" href="/">
-      <img class="logo-nav" alt="Unideia" src="../img/logo-128px.png">
-   
-
-    <a class="py-4 d-none d-md-inline-block" href="#">Produto</a>
-    <a class="py-4 d-none d-md-inline-block" href="#">Tour</a>
-    <a class="py-4 d-none d-md-inline-block" href="#">Features</a>
+    {{#if user}}
     <a class="py-4 d-none d-md-inline-block" href="#">Premium</a>
     <a class="py-4 d-none d-md-inline-block" href="#">Suporte</a>
     <a class="py-4 d-none d-md-inline-block" href="#">Preços</a>
     <a class="py-4 d-none d-md-inline-block" href="#">Carrinho</a>
 
 
-
+  </div>
+  {{else}}
+  <div id="t" class="container ">
+    <a class="py-4" href="/users/login">Entrar </a> ||
+    <a class="py-4 d-none d-md-inline-block" href="/users/register"> Cadastre-se</a>
+  </div>
+  {{/if}}
 
 
   </div>

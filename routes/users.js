@@ -29,8 +29,6 @@ router.post('/login', (req, res, next) => {
 
 });
 
-;
-
 
 //Register Form POST -validating the password rules
 router.post('/register', (req, res) => {

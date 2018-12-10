@@ -4,8 +4,10 @@
 }
 
 .logo-nav {
-  width: 80px;
+  width: 120px;
   margin: auto;
+  position: absolute;
+  right:1310px;
 }
 .sidenav {
   height: 100%;
@@ -71,6 +73,10 @@ body {
 
 #cardb {
   background-color:#777
+}
 
-  
+#t {
+  font-size: larger;
+  position: absolute;
+  left: 1300px;  
 }

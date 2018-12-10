@@ -26,6 +26,7 @@ const Theme = mongoose.model('themes');
 
 // User Idea Index Page
 router.get('/myideas', ensureAuthenticated, (req, res) => {
+
   Theme.find({}).sort({
       curso: 'asc'
     })
@@ -35,7 +36,7 @@ router.get('/myideas', ensureAuthenticated, (req, res) => {
         res.redirect('/ideas');
       } else {
         Idea.find({
-            user: req.user.id
+          user: req.user.id
           })
           .sort({
             date: 'desc'
@@ -133,9 +134,8 @@ router.post('/', ensureAuthenticated, (req, res) => {
     const newUser = {
       title: req.body.title,
       details: req.body.details,
+      autor: req.user,
       user: req.user.id,
-      autor: req.user.name,
-      email: req.user.email,
       tema: req.body.theme
     }
     new Idea(newUser)
@@ -171,7 +171,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
           })
       }
     });
-});
+}); 
 
 // Edit form process
 router.put('/:id', ensureAuthenticated, (req, res) => {
@@ -227,21 +227,30 @@ router.delete('/:id', ensureAuthenticated, (req, res) => {
 
 
 let Pusher = require('pusher');
-    let pusher = new Pusher({
-      appId: process.env.PUSHER_APP_ID,
-      key: process.env.PUSHER_APP_KEY,
-      secret: process.env.PUSHER_APP_SECRET,
-      cluster: process.env.PUSHER_APP_CLUSTER
-    });
+let pusher = new Pusher({
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_APP_KEY,
+  secret: process.env.PUSHER_APP_SECRET,
+  cluster: process.env.PUSHER_APP_CLUSTER
+});
 
-    router.post('/posts/:id/act', (req, res, next) => {
-        const action = req.body.action;
-        const counter = action === 'Like' ? 1 : -1;
-        Post.update({_id: req.params.id}, {$inc: {likes_count: counter}}, {}, (err, numberAffected) => {
-            pusher.trigger('post-events', 'postAction', { action: action, postId: req.params.id }, req.body.socketId);
-            res.send('');
-        });
-    });
+router.post('/posts/:id/act', (req, res, next) => {
+  const action = req.body.action;
+  const counter = action === 'Like' ? 1 : -1;
+  Post.update({
+    _id: req.params.id
+  }, {
+    $inc: {
+      likes_count: counter
+    }
+  }, {}, (err, numberAffected) => {
+    pusher.trigger('post-events', 'postAction', {
+      action: action,
+      postId: req.params.id
+    }, req.body.socketId);
+    res.send('');
+  });
+});
 
 router.post('/posts/:id/act', (req, res, next) => {
   const action = req.body.action;
