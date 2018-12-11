@@ -2,7 +2,7 @@
   <div class="container d-flex flex-column flex-md-row justify-content-between">
     <div class="sidenav">
       <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn " onclick="closeNav()">&times;</a>
         <a class="navbar-brand" href="/">Bem-vindo</a>
         <a href="/ideas">Início</a>
         <a href="/ideas/myideas">Minhas sugestões</a>
@@ -11,19 +11,21 @@
       </div>
     </div>
     <span class="py-4" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
-    <div class="nav-pill"> <a id="t" class="py-5" href="/"><img alt="Unideia" src="../img/logo-128px.png"> Portal U!</a>
+    <div class="nav-pill"> <a id="t" class="py-4" href="/"><img alt="Unideia" src="/img/logo-128px.png">
+        Portal U!</a>
     </div>
 
 
     {{#if user}}
 
-    <a id="t" class="py-5 d-none d-md-inline-block" href="/users/logout">Sair</a>
-    {{else}}
-    <div id="t">
-      <a class="py-5 d-none d-md-inline-block" href="/users/login">Entrar </a> ||
-      <a class="py-5 d-none d-md-inline-block" href="/users/register"> Cadastre-se</a>
+    <a id="
+          t2" class="py-5 d-none d-md-inline-block" href="/users/logout">Sair</a>
+      {{else}}
+      <div id="t2">
+        <a class="py-4 d-none mt-2 d-md-inline-block" href="/users/login">Entrar </a> ||
+        <a class="py-4 d-none d-md-inline-block" href="/users/register">Cadastre-se</a>
+      </div>
     </div>
-  </div>
   </div>
   {{/if}}
 </nav>

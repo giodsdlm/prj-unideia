@@ -1,14 +1,16 @@
 <form action="/ideas/search" method="POST">
   <div class="form-group">
-    <label for="theme">Selecione por curso: </label>
+    <label id="t2" for="theme">Selecione por Curso: </label>
     <select id="title" name="title">
       {{#each themes}}
       <option value="{{curso}}" selected="selected">{{curso}}</option>
       {{/each}}
     </select>
-    <button type="submit" class="btn mb-2 ml-2 btn-dark">Buscar</button>
-    <a class="btn btn-success mb-2 " href="/ideas/add">Adicione uma ideia!</a>
-    <a class="btn btn-info mb-2 " href="/ideas/myideas">Ver minhas sugestões</a>
+    <button type="submit" class="btn mb-2 mr-1 ml-1  btn-dark">Buscar</button>
+
+    <a class="btn btn-success mb-2 btn-lg " href="/ideas/add">Novo</a>
+    <a class="btn btn-info  mb-2 btn-lg " href="/ideas/myideas">Minhas ideias</a>
+
   </div>
 
 </form>
@@ -25,9 +27,19 @@
           <footer class="blockquote-footer">{{tema}}</cite>
           </footer>
         </blockquote>
+        <div>
+          <a class="btn btn-outline-warning btn-block mt-3 mb-2" href="#" onclick="actOnPost(event); btn-warning"
+            data-card-id="{{ cardId }}">Boa ideia!</a>
+          <span id="likes-count-{{ cardId }}">{{ idea.likes_count }}</span>
+         
+          <form action="/ideas/search" method="POST">
+            <div class="form-group">
+              <button type="submit" class="btn btn-block mb-2 btn-outline-dark">Adotar</button>
+            </div>
+          </form>
+         
+        </div>
       </div>
-      <a class="btn btn-warning mb-2 ml-2" href="#" onclick="actOnPost(event);" data-card-id="{{ cardId }}">Like</a>
-      <span id="likes-count-{{ cardId }}">{{ idea.likes_count }}</span>
 
       <div class="card-footer text-muted text-right">
         <small>

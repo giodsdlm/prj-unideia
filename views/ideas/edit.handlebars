@@ -1,8 +1,7 @@
 {{#each errors}}
 <div class="alert alert-danger">{{text}}</div>
-{{else}}
-
 {{/each}}
+
 <div class="card card-body">
   <h3>Editar Ideia</h3>
   <form action="/ideas/{{idea.id}}?_method=PUT" method="POST">
@@ -23,6 +22,8 @@
         {{/each}}
       </select>
     </div>
-    <button type="submit" class="btn btn-outline-primary">Salvar</button>
+
+    <a class="btn btn-lg btn-info mb-2 ml-2 " href="/ideas/">Voltar</a>
+    <button type="submit" class="btn btn-lg mb-2 btn-success">Salvar</button>
   </form>
 </div>

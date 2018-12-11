@@ -77,7 +77,14 @@ body {
 
 #t {
   font-weight: bold;
-  font-size: x-large;
+  font-size: xx-large;
   position: sticky;
-  left: 1300px;  
+  left: 1300 px;  
 }
+#t2 {
+  font-weight:inherit;
+  font-size: large;
+  position: sticky;
+  left: 1300 px;  
+}
+

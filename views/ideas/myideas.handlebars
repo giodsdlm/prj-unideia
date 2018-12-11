@@ -1,15 +1,15 @@
 <form action="/ideas/search" method="POST">
   <div class="form-group">
-    <label for="theme">Pesquisar</label>
+    <label id="t2" for="theme">Pesquisar</label>
     <select id="title" name="title">
       {{#each themes}}
       <option value="{{curso}}" selected="selected">{{curso}}</option>
       {{/each}}
     </select>
-    <button type="submit" class="btn mb-2 ml-2  btn-lg btn-outline-dark">Buscar</button>
-    <a class="btn btn-outline-warning mb-2 ml-2 btn-lg" data-toggle="collapse" data-target="#detalhes" aria-expanded="false"
-      aria-controls="detalhes" href="#">Detalhar</a>
-    <a class="btn btn-lg btn-outline-info mb-2 ml-2 " href="/ideas/add">Novo</a>
+    <button type="submit" class="btn mb-2 ml-2  btn-lg btn-dark">Buscar</button>
+    <a class="btn btn-warning mb-2 ml-2 btn-lg" data-toggle="collapse" data-target="#detalhes" aria-expanded="false"
+      aria-controls="detalhes" href="#">Opções</a>
+    <a class="btn btn-lg btn-success mb-2 ml-2 " href="/ideas/add">Novo</a>
     <a class="btn btn-lg btn-info mb-2 ml-2 " href="/ideas/">Voltar</a>
   </div>
 </form>

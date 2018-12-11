@@ -36,7 +36,7 @@ router.get('/myideas', ensureAuthenticated, (req, res) => {
         res.redirect('/ideas');
       } else {
         Idea.find({
-          user: req.user.id
+            user: req.user.id
           })
           .sort({
             date: 'desc'
@@ -171,7 +171,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
           })
       }
     });
-}); 
+});
 
 // Edit form process
 router.put('/:id', ensureAuthenticated, (req, res) => {
@@ -193,21 +193,32 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
 
 
 router.post('/search', ensureAuthenticated, (req, res) => {
-  var teste = req.body.title
-  Idea.find({
-      tema: teste
-    })
-    .sort({
-      date: 'desc'
-    })
-    .then(ideas => {
-      if (!ideas) {
-        req.flash('error_msg', 'Acesso não autorizado.');
+  var teste = req.body.title;
+  var isDev = user.developer;
+  console.log('yay');
+
+  Theme.find({})
+    .then(themes => {
+      if (!themes) {
+        req.flash('error_msg', 'Erro ao retornar a lista de cursos.');
         res.redirect('/ideas');
       } else {
-        res.render(
-          'ideas/search', {
-            ideas: ideas
+        Idea.find({
+            tema: teste
+          })
+          .sort({
+            date: 'desc'
+          })
+          .then(ideas => {
+            if (!ideas) {
+              req.flash('error_msg', 'Acesso não autorizado.');
+              res.redirect('/ideas');
+            } else {
+              res.render(
+                'ideas/search', {
+                  ideas: ideas
+                });
+            }
           });
       }
     });
@@ -220,7 +231,7 @@ router.delete('/:id', ensureAuthenticated, (req, res) => {
     })
     .then(() => {
       req.flash('success_msg', 'Ideia removida!');
-      res.redirect('/ideas');
+      res.redirect('/ideas/myideas');
     });
 });
 
@@ -263,5 +274,7 @@ router.post('/:id/act', (req, res, next) => {
     res.send('');
   });
 });
+
+
 
 module.exports = router;

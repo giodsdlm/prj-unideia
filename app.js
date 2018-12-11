@@ -13,9 +13,8 @@ require('dotenv').config();
 
 const app = express();
 
-
-
 MomentHandler.registerHelpers(Handlebars);
+
 
 Handlebars.registerHelper('eachByIdx', function (context, options) {
   var output = '';
@@ -136,3 +135,4 @@ var pusher = new Pusher({
 pusher.trigger('my-channel', 'my-event', {
   "message": "hello world"
 });
+
