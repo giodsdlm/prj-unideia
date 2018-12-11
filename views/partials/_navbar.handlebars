@@ -3,31 +3,27 @@
     <div class="sidenav">
       <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="/"><img class="logo-nav" alt="Unideia" src="../img/logi.png"></a>
-        <a class="navbar-brand" href="/">Portal U!</a>
+        <a class="navbar-brand" href="/">Bem-vindo</a>
         <a href="/ideas">Início</a>
         <a href="/ideas/myideas">Minhas sugestões</a>
-        <a href="#">Adotados</a>
+        <a href="#">Projetos adotados</a>
         <a href="/about">Sobre a U!</a>
       </div>
     </div>
     <span class="py-4" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  </div>
-    <a class="navbar-brand" href="/"><img class="logo" alt="Unideia" src="../img/logo-128px.png">Portal U!</a>
+    <div class="nav-pill"> <a id="t" class="py-5" href="/"><img alt="Unideia" src="../img/logo-128px.png"> Portal U!</a>
+    </div>
 
 
     {{#if user}}
 
-    <a id="t" class="py-4 d-none d-md-inline-block" href="/users/logout">Sair</a>
+    <a id="t" class="py-5 d-none d-md-inline-block" href="/users/logout">Sair</a>
+    {{else}}
+    <div id="t">
+      <a class="py-5 d-none d-md-inline-block" href="/users/login">Entrar </a> ||
+      <a class="py-5 d-none d-md-inline-block" href="/users/register"> Cadastre-se</a>
+    </div>
   </div>
-</div>
-  {{else}}
-  <div id="t" class="container ">
-    <a class="py-4" href="/users/login">Entrar </a> ||
-    <a class="py-4 d-none d-md-inline-block" href="/users/register"> Cadastre-se</a>
   </div>
   {{/if}}
-
-
-  </div>
 </nav>

@@ -4,10 +4,9 @@
 }
 
 .logo-nav {
-  width: 120px;
+  width: 100x;
   margin: auto;
-  position: absolute;
-  right:1310px;
+  
 }
 .sidenav {
   height: 100%;
@@ -19,7 +18,7 @@
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 50px;
+  padding-top: 70px;
 }
 
 .sidenav a {
@@ -72,11 +71,13 @@ body {
 }
 
 #cardb {
-  background-color:#777
+  background-color:#46494b;
+  
 }
 
 #t {
-  font-size: larger;
-  position: absolute;
+  font-weight: bold;
+  font-size: x-large;
+  position: sticky;
   left: 1300px;  
 }

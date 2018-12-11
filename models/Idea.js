@@ -27,9 +27,8 @@ const IdeaSchema = new Schema({
   status: {
     type: String
   },
-  likes_count: {
-    type: Number
-  }
+  likes_count: {}
+
 });
 
 mongoose.model('ideas', IdeaSchema);

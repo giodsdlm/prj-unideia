@@ -1,13 +1,15 @@
 <form action="/ideas/search" method="POST">
   <div class="form-group">
-    <label for="theme">Pesquisar</label>
+    <label for="theme">Selecione por curso: </label>
     <select id="title" name="title">
       {{#each themes}}
       <option value="{{curso}}" selected="selected">{{curso}}</option>
       {{/each}}
     </select>
     <button type="submit" class="btn mb-2 ml-2 btn-dark">Buscar</button>
-    <a class="btn btn-outline-info mb-2 ml-2 " href="/ideas/add">Novo</a>
+    <a class="btn btn-success mb-2 " href="/ideas/add">Adicione uma ideia!</a>
+    <a class="btn btn-info mb-2 " href="/ideas/myideas">Ver minhas sugestões</a>
+  </div>
 
 </form>
 </div>
@@ -24,8 +26,8 @@
           </footer>
         </blockquote>
       </div>
-      <a class="btn btn-primary mb-2 ml-2" href="#" onclick="actOnPost(event);" data-card-id="{{ this.id }}">Like</a>
-      <span id="likes-count-{{ cardId }}">{{ this.likes_count }}</span>
+      <a class="btn btn-warning mb-2 ml-2" href="#" onclick="actOnPost(event);" data-card-id="{{ cardId }}">Like</a>
+      <span id="likes-count-{{ cardId }}">{{ idea.likes_count }}</span>
 
       <div class="card-footer text-muted text-right">
         <small>
