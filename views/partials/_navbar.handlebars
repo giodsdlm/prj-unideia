@@ -17,15 +17,14 @@
 
 
     {{#if user}}
-
-    <a id="
-          t2" class="py-5 d-none d-md-inline-block" href="/users/logout">Sair</a>
-      {{else}}
-      <div id="t2">
-        <a class="py-4 d-none mt-2 d-md-inline-block" href="/users/login">Entrar </a> ||
-        <a class="py-4 d-none d-md-inline-block" href="/users/register">Cadastre-se</a>
-      </div>
+    <a id="t2" class="py-5 d-md-inline-block" href=#>Olá, {{{user.name}}} :) </a>
+    <a id="t2" class="py-5 d-none d-md-inline-block" href="/users/logout">Sair</a>
+    {{else}}
+    <div id="t2">
+      <a class="py-4 d-none mt-2 d-md-inline-block" href="/users/login">Entrar </a> ||
+      <a class="py-4 d-none d-md-inline-block" href="/users/register">Cadastre-se</a>
     </div>
+  </div>
   </div>
   {{/if}}
 </nav>

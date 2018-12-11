@@ -194,8 +194,8 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
 
 router.post('/search', ensureAuthenticated, (req, res) => {
   var teste = req.body.title;
-  var isDev = user.developer;
-  console.log('yay');
+  // var isDev = user.developer;
+
 
   Theme.find({})
     .then(themes => {
