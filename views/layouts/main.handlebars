@@ -69,11 +69,11 @@
 
   <script>
     var updatePostStats = {
-      Like: function (postId) {
-        document.querySelector('#likes-count-' + postId).textContent++;
+      Like: function (cardId) {
+        document.querySelector('#likes-count-' + cardId).textContent++;
       },
-      Unlike: function (postId) {
-        document.querySelector('#likes-count-' + postId).textContent--;
+      Unlike: function (cardId) {
+        document.querySelector('#likes-count-' + cardId).textContent--;
       }
     };
 
@@ -87,13 +87,14 @@
     };
 
     var actOnPost = function (event) {
-      var postId = event.target.dataset.postId;
+      var cardId = event.target.dataset.cardId;
       var action = event.target.textContent.trim();
       toggleButtonText[action](event.target);
-      updatePostStats[action](postId);
-      axios.post('/posts/' + postId + '/act', { action: action });
+      updateCardStats[action](cardId);
+      axios.post('/ideas/' + cardId + '/act', { action: action });
     };
   </script>
+
   <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 
   <script>
@@ -113,7 +114,7 @@
       // log message data to console - for debugging purposes
       console.log(data);
       var action = data.action;
-      updatePostStats[action](data.postId);
+      updateCardStats[action](data.cardId);
     });
   </script>
 </body>

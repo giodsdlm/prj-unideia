@@ -6,16 +6,17 @@
       <option value="{{curso}}" selected="selected">{{curso}}</option>
       {{/each}}
     </select>
-    <button type="submit" class="btn mb-2 ml-2 btn-info">Enviar</button>
+    <button type="submit" class="btn mb-2 ml-2 btn-outline-dark">Buscar</button>
     <a class="btn btn-outline-warning mb-2 ml-2 " data-toggle="collapse" data-target="#detalhes" aria-expanded="false"
       aria-controls="detalhes" href="#">Detalhar</a>
+    <a class="btn btn-outline-info mb-2 ml-2 " href="/ideas/add">Novo</a>
   </div>
 </form>
-<div  class="container">
+<div class="container">
   <div class="card-grid">
     {{#each ideas}}
     <div class="card border-dark mb-4">
-      <h4 class="card-header">{{title}}</h4>
+      <h4 class="card-header text-white" id="cardb">{{title}}</h4>
       <div class="card-body">
         <p>{{details}}</p>
         <small>

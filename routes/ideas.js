@@ -224,8 +224,6 @@ router.delete('/:id', ensureAuthenticated, (req, res) => {
     });
 });
 
-
-
 let Pusher = require('pusher');
 let pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
@@ -234,7 +232,7 @@ let pusher = new Pusher({
   cluster: process.env.PUSHER_APP_CLUSTER
 });
 
-router.post('/posts/:id/act', (req, res, next) => {
+router.post('/:id/act', (req, res, next) => {
   const action = req.body.action;
   const counter = action === 'Like' ? 1 : -1;
   Post.update({
@@ -244,15 +242,11 @@ router.post('/posts/:id/act', (req, res, next) => {
       likes_count: counter
     }
   }, {}, (err, numberAffected) => {
-    pusher.trigger('post-events', 'postAction', {
-      action: action,
-      postId: req.params.id
-    }, req.body.socketId);
     res.send('');
   });
 });
 
-router.post('/posts/:id/act', (req, res, next) => {
+router.post('/:id/act', (req, res, next) => {
   const action = req.body.action;
   const counter = action === 'Like' ? 1 : -1;
   Post.update({
@@ -262,6 +256,10 @@ router.post('/posts/:id/act', (req, res, next) => {
       likes_count: counter
     }
   }, {}, (err, numberAffected) => {
+    pusher.trigger('card-events', 'cardAction', {
+      action: action,
+      cardId: req.params.id
+    }, req.body.socketId);
     res.send('');
   });
 });

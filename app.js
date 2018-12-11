@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -10,8 +9,11 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Handlebars = require("handlebars");
 const MomentHandler = require("handlebars.moment");
+require('dotenv').config();
 
 const app = express();
+
+
 
 MomentHandler.registerHelpers(Handlebars);
 

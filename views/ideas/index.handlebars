@@ -6,9 +6,9 @@
       <option value="{{curso}}" selected="selected">{{curso}}</option>
       {{/each}}
     </select>
-    <button type="submit" class="btn mb-2 ml-2 btn-dark">Enviar</button>
-    <a class="btn btn-primary mb-2 ml-2 " data-toggle="collapse" data-target="#detalhes" aria-expanded="false"
-      aria-controls="detalhes" href="#">Detalhar</a>
+    <button type="submit" class="btn mb-2 ml-2 btn-dark">Buscar</button>
+    <a class="btn btn-outline-info mb-2 ml-2 " href="/ideas/add">Novo</a>
+
 </form>
 </div>
 <div class="container">
@@ -24,16 +24,16 @@
           </footer>
         </blockquote>
       </div>
-      <label class="btn ml-3 mb-2 mr-2 btn-xs btn-outline-warning" type="submit" onclick="actOnPost(event);" data-post-id="{{ this.id }}"><i class="fas fa-star"></i></label>
-          <span id="likes-count-{{ this.id }}">{{ this.likes_count }}</span>
-      <div class="collapse" id="detalhes">
-        <div class="card-footer text-muted text-right">
-          <small>
-            <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor.name}}">
-            <input type="text" class="form-control-plaintext" placeholder="Email: {{autor.email}}">
-            <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
-          </small>
-        </div>
+      <a class="btn btn-primary mb-2 ml-2" href="#" onclick="actOnPost(event);" data-card-id="{{ this.id }}">Like</a>
+      <span id="likes-count-{{ cardId }}">{{ this.likes_count }}</span>
+
+      <div class="card-footer text-muted text-right">
+        <small>
+          <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor.name}}">
+          <input type="text" class="form-control-plaintext" placeholder="Email: {{autor.email}}">
+          <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
+        </small>
+
       </div>
     </div>
     {{else}}
@@ -42,7 +42,6 @@
 <div class="jumbotron text-center">
   <h1 class="display-4"> :( </h1>
   <h1 class="display-5">Nenhuma ideia encontrada.</h1>
-  <p class="lead">Você pode contribuir com uma nova clicando <a href="/ideas/add">aqui.</a> ;)
-  </p>
+  <p class="lead">Você pode contribuir com uma nova clicando <a href="/ideas/add">aqui.</a></p>
 </div>
 {{/each}}
