@@ -32,13 +32,14 @@
             data-card-id="{{ cardId }}">Boa ideia!</a>
           <span id="likes-count-{{ cardId }}">{{ idea.likes_count }}</span>
          
+         {{#if autor.developer}}
           <form action="/ideas/search" method="POST">
             <div class="form-group">
               <button type="submit" class="btn btn-block mb-2 btn-outline-dark">Adotar</button>
             </div>
           </form>
-         
-        </div>
+          {{/if}}
+         </div>
       </div>
 
       <div class="card-footer text-muted text-right">

@@ -6,8 +6,10 @@
 .logo-nav {
   width: 100x;
   margin: auto;
-  
+ 
+
 }
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -48,43 +50,54 @@
 }
 
 @media screen and (max-height: 300px) {
-.sidenav {padding-top: 30px;}
-.sidenav a {font-size: 25px;}
+  .sidenav {
+    padding-top: 30px;
+  }
+
+  .sidenav a {
+    font-size: 25px;
+  }
 }
 
 body {
   font-family: 'Arvo', serif;
   font-size: 20px
 }
+
+
+
 .site-header {
-  background-color: rgba(0,62,131, .85);
+  background-color: rgba(0, 62, 131, .85);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
+
 }
+
 .site-header a {
   color: #fff;
   transition: ease-in-out color .15s;
 }
+
 .site-header a:hover {
   color: #fb1;
   text-decoration: none;
 }
 
 #cardb {
-  background-color:#46494b;
-  
+  background-color: #46494b;
+
 }
 
 #t {
   font-weight: bold;
   font-size: xx-large;
   position: sticky;
-  left: 1300 px;  
-}
-#t2 {
-  font-weight:inherit;
-  font-size: large;
-  position: sticky;
-  left: 1300 px;  
+  left: 1300 px;
 }
 
+#t2 {
+  font-weight: inherit;
+  font-size: large;
+  position: sticky;
+  left: 1300 px;
+}
