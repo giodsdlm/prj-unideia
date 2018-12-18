@@ -61,7 +61,10 @@ router.get('/myideas', ensureAuthenticated, (req, res) => {
 // General Idea Index Page
 router.get('/', ensureAuthenticated, (req, res) => {
   
-  console.log(req.user.developer);
+  let dev = (req.user.developer);
+console.log(req.user.developer);
+console.log(req.user.name);
+
 
   Theme.find({}).sort({
       curso: 'asc'

@@ -30,15 +30,15 @@
         <div>
           <a class="btn btn-outline-warning btn-block mt-3 mb-2" href="#" onclick="actOnPost(event); btn-warning"
             data-card-id="{{ cardId }}">Boa ideia!</a>
-          <span id="likes-count-{{ cardId }}">{{ idea.likes_count }}</span>
+          <span id="likes-count-{{ cardId }}">{{ likes_count }}</span>
          
-         {{#if autor.developer}}
+         {{!-- {{#if developer}} --}}
           <form action="/ideas/search" method="POST">
             <div class="form-group">
               <button type="submit" class="btn btn-block mb-2 btn-outline-dark">Adotar</button>
             </div>
           </form>
-          {{/if}}
+          {{!-- {{/if}} --}}
          </div>
       </div>
 
