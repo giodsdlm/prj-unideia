@@ -46,7 +46,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://administrador:buffay13@ds031618.mlab.com:31618/unideiadb', {
     useNewUrlParser: true
   }) //promise
-  .then(() => console.log('MongoDB Connected...'))
+  // .then(() => console.log('MongoDB Connected...'))
+  .then(() => console.log('MongoLab Connected...'))
   .catch(err => console.log(err));
 
 // Handlebars Middleware
