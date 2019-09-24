@@ -4,8 +4,7 @@
   "description": "App para criação de ideas para TCC.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,14 +16,14 @@
     "url": "https://github.com/giodsdlm/prj-unideia/issues"
   },
   "engines": {
-   "node": "v10.16.0"
-  }, 
+    "node": "v10.16.0"
+  },
   "homepage": "https://github.com/giodsdlm/prj-unideia#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
-    "dotenv": "^6.2.0",
+    "dotenv": "^8.1.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
