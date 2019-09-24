@@ -42,7 +42,8 @@ require('./config/passport')(passport);
 mongoose.Promise = global.Promise;
 
 // Connect to Mongoose and defining project database
-mongoose.connect('mongodb://localhost/unideia-dev', {
+// mongoose.connect('mongodb://localhost/unideia-dev', {
+mongoose.connect('mongodb://administrador:buffay13@ds031618.mlab.com:31618/unideiadb', {
     useNewUrlParser: true
   }) //promise
   .then(() => console.log('MongoDB Connected...'))
