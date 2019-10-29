@@ -27,7 +27,9 @@ const IdeaSchema = new Schema({
   status: {
     type: String
   },
-  likes_count: {}
+  likes_count: {
+    type: Number
+  }
 
 });
 
