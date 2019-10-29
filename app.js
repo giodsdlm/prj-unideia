@@ -42,10 +42,12 @@ require('./config/passport')(passport);
 mongoose.Promise = global.Promise;
 
 // Connect to Mongoose and defining project database
-mongoose.connect('mongodb://localhost/unideia-dev', {
+// mongoose.connect('mongodb://localhost/unideia-dev', {
+mongoose.connect('mongodb://administrador:buffay13@ds031618.mlab.com:31618/unideiadb', {
     useNewUrlParser: true
   }) //promise
-  .then(() => console.log('MongoDB Connected...'))
+  // .then(() => console.log('MongoDB Connected...'))
+  .then(() => console.log('MongoLab Connected...'))
   .catch(err => console.log(err));
 
 // Handlebars Middleware
@@ -117,7 +119,8 @@ app.use('/users', users);
 
 
 const port = 5000;
-app.listen(port, () => {
+
+app.listen((process.env.PORT || 5000), () => {
   console.log(`Server started on port ${port}`);
 });
 
