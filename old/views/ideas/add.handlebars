@@ -1,0 +1,34 @@
+<div class="card card-body">
+  <h3>Ideia de projeto</h3>
+  <form action="/ideas" method="POST">
+    <div class="form-group">
+      <label for="title">Título</label>
+      <input type="text" class="form-control" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="details">Detalhes</label>
+      <textarea type="text" class="form-control" name="details" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="theme">Curso interessado:</label>
+      <select class="form-control" name="theme" required>
+        {{#each themes}}
+        <option>{{curso}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <a class="btn btn-lg btn-info mb-2 ml-2 " href="/ideas/">Voltar</a>
+    <button type="submit" class="btn btn-lg mb-2 ml-2 btn-success">Enviar</button>
+
+  </form>
+</div>
+<div class="card-footer text-muted text-right">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control-plaintext" placeholder="Autor: {{user.name}}">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control-plaintext" placeholder="Email: {{user.email}}">
+    </div>
+  </div>
+</div>

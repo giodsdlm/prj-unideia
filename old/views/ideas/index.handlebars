@@ -1,0 +1,62 @@
+<form action="/ideas/search" method="POST">
+  <div class="form-group">
+    <label id="t2" for="theme">Selecione por Curso: </label>
+    <select id="title" name="title">
+      {{#each themes}}
+      <option value="{{curso}}" selected="selected">{{curso}}</option>
+      {{/each}}
+    </select>
+    <button type="submit" class="btn mb-2 mr-1 ml-1  btn-dark">Buscar</button>
+
+    <a class="btn btn-success mb-2 btn-lg " href="/ideas/add">Novo</a>
+    <a class="btn btn-info  mb-2 btn-lg " href="/ideas/myideas">Minhas ideias</a>
+
+  </div>
+
+</form>
+</div>
+<div class="container">
+  <div class="card-columns">
+    {{#each ideas}}
+    <div class="card border-info mt-3 mb-3">
+      <h4 class="card-header text-white" id="cardb">{{title}}</h4>
+      <div class="card-body">
+
+        <blockquote class="blockquote mb-0">
+          <h6>{{details}}</h6>
+          <footer class="blockquote-footer">{{tema}}</cite>
+          </footer>
+        </blockquote>
+        <div>
+          <a class="btn btn-outline-warning btn-block mt-3 mb-2" href="#" onclick="actOnPost(event); btn-warning"
+            data-card-id="{{ cardId }}">Boa ideia!</a>
+          <span id="likes-count-{{ cardId }}">{{ likes_count }}</span>
+         
+         {{!-- {{#if developer}} --}}
+          <form action="/ideas/search" method="POST">
+            <div class="form-group">
+              <button type="submit" class="btn btn-block mb-2 btn-outline-dark">Adotar</button>
+            </div>
+          </form>
+          {{!-- {{/if}} --}}
+         </div>
+      </div>
+
+      <div class="card-footer text-muted text-right">
+        <small>
+          <input type="text" class="form-control-plaintext" placeholder="Criado por: {{autor.name}}">
+          <input type="text" class="form-control-plaintext" placeholder="Email: {{autor.email}}">
+          <input type="text" class="form-control-plaintext" placeholder="{{moment date "calendar"}}">
+        </small>
+
+      </div>
+    </div>
+    {{else}}
+  </div>
+</div>
+<div class="jumbotron text-center">
+  <h1 class="display-4"> :( </h1>
+  <h1 class="display-5">Nenhuma ideia encontrada.</h1>
+  <p class="lead">Você pode contribuir com uma nova clicando <a href="/ideas/add">aqui.</a></p>
+</div>
+{{/each}}
